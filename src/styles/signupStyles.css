@@ -1,0 +1,83 @@
+/* signupStyles.css */
+
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: url('https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHdvcmtpbmclMjBjb21wdXRlcnxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  border-radius: 15px;
+  padding: 40px 20px;
+  width: 70%;
+  height: 50vh;
+  max-width: 500px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px); /* Blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  line-height: 1.5;
+  margin-top: 10px;
+  font-family: 'Times New Roman', serif;
+  font-weight: bold;
+}
+
+.auth-container h2 {
+  text-align: center;
+  color: navy;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  margin-top: 10px;
+  font-size: 32px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid navy;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button {
+  background-color: navy;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 30px;
+  line-height: 1.5;
+  font-family: 'Times New Roman', serif;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #001a4d; /* Darker navy */
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 20px;
+    width: 90%;
+  }
+}

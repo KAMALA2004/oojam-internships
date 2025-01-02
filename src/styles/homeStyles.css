@@ -1,0 +1,218 @@
+/* General Body and Home Styles */
+body, .home {
+  background-color: #F5F5DC; /* Background color for the home page */
+  font-family: 'Arial', sans-serif; /* Default font */
+}
+/* Add space between Register and Dashboard link */
+.register-link, .dashboard-link {
+  display: block;
+  margin-bottom: 10px; /* Adjust this value to control the space */
+}
+
+/* Optional: If you want more space between the links specifically */
+.register-link {
+  margin-bottom: 20px; /* More space for the Register link */
+}
+
+/* Header Section */
+.header {
+  position: relative;
+  left: 0; /* Reset left/right for responsiveness */
+  right: 0;
+  margin: 0; /* Reset margin for responsiveness */
+  height: 30vh;
+  overflow: hidden;
+  background-color: #003366;
+  color: rgb(255, 255, 255); /* White text */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: slideDown 1s ease forwards;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 40px;
+  opacity: 1;
+  text-shadow: none;
+  z-index: 1; /* Ensure content stays above */
+}
+
+.header * {
+  color: inherit; /* Inherit color for all child elements */
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Welcome Message */
+.welcome-message {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 1.2em;
+  color: black;
+}
+
+/* Video and Text Container */
+.video-text-container {
+  display: flex;
+  flex-direction: column; /* Stack video and text vertically */
+  align-items: center; /* Center align items horizontally */
+  justify-content: center; /* Center align items vertically */
+  text-align: center; /* Center text */
+  height: 100vh; /* Full height of the viewport */
+}
+
+/* Internship Item Section */
+.internship-item {
+  display: flex;
+  flex-direction: row; /* Side-by-side layout */
+  margin: 20px 0; /* Gap between boxes */
+  border: 1px solid #000000;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, opacity 0.5s ease; /* Smooth scaling and fade-in */
+  opacity: 0; /* Hidden by default */
+  transform: translateY(20px); /* Start below */
+  height: 400px; /* Consistent height */
+  box-sizing: border-box;
+}
+
+/* Add Extra Space Between Boxes */
+.internship-item + .internship-item {
+  margin-top: 90px; 
+}
+
+.internship-item.visible {
+  opacity: 1; /* Fade-in effect */
+  transform: translateY(0); /* Original position */
+}
+
+/* Video Section */
+.video-section {
+  flex: 1;
+  height: 100%; /* Full height */
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Center video horizontally */
+  align-items: center; /* Center video vertically */
+}
+
+.internship-video {
+  width: 100%; /* Full width */
+  height: 100%; /* Full height to cover the section */
+  object-fit: cover; 
+  /* Maintain aspect ratio */
+}
+
+/* Info Section */
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Stack text elements */
+  justify-content: center;
+  padding: 20px;
+  background-color: #acf3dd;
+  border-radius: 10px;
+  transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth background and shadow transition */
+  position: relative; /* Position relative for overlay */
+  overflow: hidden; /* Prevents text overflow outside the box */
+  text-align: center;
+}
+
+/* Expanding and Contracting Animation on Hover */
+.info-section h2,
+.info-section p {
+  position: relative; /* Relative for animation effects */
+  animation: none; /* Default state */
+  transform-origin: center center; /* Ensure scaling is centered */
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.info-section:hover h2 {
+  transform: scale(1.1); /* Scale up title on hover */
+}
+
+.info-section:hover p {
+  transform: scale(1.05); /* Scale up description slightly */
+}
+
+/* CTA Button */
+.cta-button {
+  padding: 10px 20px;
+  background-color: #007B7F; /* Button background */
+  color: white; /* Button text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease; /* Hover effects */
+}
+
+.dashboard-link {
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #005f5f; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Add space between navigation links */
+.nav-link {
+  margin-right: 15px; /* Add space between the buttons */
+  text-decoration: none;
+  color: #ffffff; /* Ensure the text is white */
+  font-weight: bold;
+ 
+}
+
+.nav-link:last-child {
+  margin-right: 0; /* Remove margin from the last link */
+}
+
+.dashboard-link {
+  margin-top: 20px;
+  text-decoration: none;
+  color: #ffffff; /* Ensure the text is white */
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .nav-link {
+    margin-right: 10px; /* Reduce space for smaller screens */
+  }
+
+  .video-text-container {
+    flex-direction: column; /* Stack video and text vertically on smaller screens */
+  }
+
+  .internship-item {
+    flex-direction: column; /* Stack video and info section vertically */
+    height: auto; /* Allow height to adjust based on content */
+  }
+
+  .video-section, .info-section {
+    flex: none; /* Reset flex behavior */
+    width: 100%; /* Full width for both sections */
+    height: auto; /* Let the content determine the height */
+  }
+
+  .internship-video {
+    width: 100%; /* Full width for video on smaller screens */
+    height: auto; /* Adjust height to maintain aspect ratio */
+  }
+
+  .info-section {
+    /* Add some space between video and text */
+    text-align: center; /* Center-align text */
+  }
+
+  .welcome-message {
+    font-size: 1em; /* Adjust font size for mobile */
+  }
+}

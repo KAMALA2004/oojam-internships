@@ -1,0 +1,188 @@
+/* General body styling */
+.internship-form body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f0f0; /* Soft background color as fallback */
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: flex-start; /* Aligns the content to the top */
+    min-height: 100vh;
+    position: relative; /* Allow the video background to be positioned */
+    overflow-y: auto; /* Enable scrolling */
+}
+
+/* Video background */
+.internship-form .video-background {
+    position: fixed; /* Fix the video in place */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video fills the container while maintaining aspect ratio */
+    z-index: -1; /* Ensures the video stays in the background */
+    min-width: 100vw; /* Ensures the video is at least as wide as the viewport */
+    min-height: 100vh; /* Ensures the video is at least as tall as the viewport */
+    overflow: hidden; /* Prevents any overflow of the video outside the viewport */
+}
+
+/* Solid background color for mobile view */
+@media (max-width: 768px) {
+    .internship-form .video-background {
+        display: none; /* Hide the video on smaller screens */
+    }
+
+    .internship-form body {
+        background-color: #003366; /* Solid color for mobile devices */
+        background-size: cover; /* Make sure the background color covers the entire viewport */
+    }
+
+    .internship-form .form-container {
+        background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
+    }
+}
+
+/* Header styling */
+.internship-form h2 {
+    text-align: center;
+    color: #003366; /* Dark blue for heading */
+    margin-bottom: 20px;
+    font-size: 2rem; /* Adjusted font size */
+}
+
+/* Form container styling */
+.internship-form .form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* White with opacity to allow video to show through */
+    padding: 40px;
+    height: 290vh;
+    width: 45vw;
+    box-sizing: border-box;
+    border-radius: 10px; /* Optional: rounded corners */
+    z-index: 1; /* Ensure form stays on top of video */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for the form */
+    margin: 100px auto; /* Centers the form horizontally and adds margin from top */
+}
+
+/* Form styling */
+.internship-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between form elements */
+}
+
+.internship-form form label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.internship-form form input, 
+.internship-form form select, 
+.internship-form form textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.internship-form form input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.internship-form button {
+    padding: 15px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #003366; /* Dark blue for button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.internship-form button:hover {
+    background-color: #005bb5; /* Lighter blue on hover */
+}
+
+.internship-form button:disabled {
+    background-color: #999; /* Grey when disabled */
+    cursor: not-allowed;
+}
+
+/* Error and success message styling */
+.internship-form .error-message,
+.internship-form .success-message {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.internship-form .error-message {
+    color: red;
+}
+
+.internship-form .success-message {
+    color: green;
+}
+
+/* Input field with icons */
+.internship-form input[type="file"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Add some space between the file inputs */
+.internship-form input[type="file"]:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .internship-form .form-container {
+        width: 80vw; /* Decrease width on smaller screens */
+        height: auto; /* Adjust height */
+        padding: 20px; /* Reduce padding */
+    }
+
+    .internship-form h2 {
+        font-size: 1.5rem; /* Smaller heading for mobile */
+    }
+
+    .internship-form button {
+        font-size: 1rem; /* Smaller button text */
+        padding: 10px; /* Reduced padding */
+    }
+
+    .internship-form form input,
+    .internship-form form select,
+    .internship-form form textarea {
+        font-size: 0.9rem; /* Slightly smaller input text */
+    }
+}
+
+@media (max-width: 480px) {
+    .internship-form .form-container {
+        width: 90vw; /* Further decrease width on very small screens */
+        padding: 15px; /* Further reduce padding */
+    }
+
+    .internship-form h2 {
+        font-size: 1.2rem; /* Further reduce font size of heading */
+    }
+
+    .internship-form button {
+        font-size: 0.9rem; /* Even smaller button text */
+        padding: 8px; /* Further reduce padding */
+    }
+
+    .internship-form form input,
+    .internship-form form select,
+    .internship-form form textarea {
+        font-size: 0.8rem; /* Smaller font size for form fields */
+    }
+}
