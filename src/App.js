@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import InternshipForm from "./components/InternshipForm";
-import Dashboard from "./components/Dashboard";  // Import the Dashboard component
+import Dashboard from "./components/Dashboard";  
 import { supabase } from "./supabaseClient";
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/internship-form" element={<InternshipForm />} />
         
-        {/* Dashboard Route - Only accessible if user is logged in */}
+        
         <Route
           path="/dashboard"
           element={user ? <Dashboard /> : <Login setUser={setUser} />}

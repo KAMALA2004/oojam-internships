@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { supabase } from '../supabaseClient'; // Import your Supabase client setup
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../styles/internshipFormStyles.css'; // Import your CSS for styling
-import Header from '../components/Header';  // If Header is inside a 'components' folder
+import { supabase } from '../supabaseClient'; 
+import { useNavigate } from 'react-router-dom'; 
+import '../styles/internshipFormStyles.css'; 
+import Header from '../components/Header';  
 
 const InternshipForm = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const InternshipForm = () => {
     portfolio_links: '',
     emergency_contact_name: '',
     emergency_contact_phone: '',
-    terms_agreement: false, // Default to false
+    terms_agreement: false, 
   });
 
   const [files, setFiles] = useState({
@@ -38,16 +38,14 @@ const InternshipForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const navigate = useNavigate(); // Initialize navigate
-
-  // Handle input changes for form fields
+  const navigate = useNavigate(); 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
       setFormData((prevData) => ({
         ...prevData,
-        [name]: checked, // Toggle checkbox value
+        [name]: checked, 
       }));
     } else {
       setFormData((prevData) => ({
@@ -57,7 +55,6 @@ const InternshipForm = () => {
     }
   };
 
-  // Handle file input changes
   const handleFileChange = (e) => {
     const { name, files: selectedFiles } = e.target;
     setFiles((prevFiles) => ({
@@ -66,22 +63,22 @@ const InternshipForm = () => {
     }));
   };
 
-  // Format date to YYYY-MM-DD
+  
   const formatDate = (date) => {
     if (!date) return null;
     const d = new Date(date);
     return d.toISOString().split('T')[0];
   };
 
-  // Upload files to Supabase storage
+  
   const uploadFile = async (file, fullName) => {
-    if (file && file.size > 5000000) { // 5MB file size limit
+    if (file && file.size > 5000000) { 
       setErrorMessage('File size exceeds the 5MB limit.');
       return null;
     }
 
-    // Sanitize the full name to create a valid folder name
-    const sanitizedFullName = fullName.replace(/[^a-zA-Z0-9-_]/g, '_'); // Replace invalid characters with underscores
+    
+    const sanitizedFullName = fullName.replace(/[^a-zA-Z0-9-_]/g, '_'); 
 
     const { data, error } = await supabase.storage
     .from('internship-files')
@@ -94,7 +91,7 @@ const InternshipForm = () => {
     return data.path;
   };
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -102,28 +99,27 @@ const InternshipForm = () => {
     setSuccessMessage('');
 
     try {
-      // Basic validation
+    
       if (!formData.full_name || !formData.email || !formData.terms_agreement) {
         setErrorMessage('Please fill out all required fields and agree to the terms.');
         return;
       }
 
-      // Validate email format
+      
       if (!/\S+@\S+\.\S+/.test(formData.email)) {
         setErrorMessage('Please enter a valid email address.');
         return;
       }
 
-      // Format date fields
+     
       const formattedDob = formatDate(formData.dob);
       const formattedStartDate = formatDate(formData.start_date);
 
-      // Handle file uploads
+      
       const photoPath = files.photo ? await uploadFile(files.photo, formData.full_name) : '';
       const resumePath = files.resume ? await uploadFile(files.resume, formData.full_name) : '';
       const adhaarPath = files.adhaar_card ? await uploadFile(files.adhaar_card, formData.full_name) : '';
 
-      // Insert form data into Supabase
       const { error } = await supabase.from('internship_registrations').insert([{
         ...formData,
         dob: formattedDob,
@@ -140,13 +136,10 @@ const InternshipForm = () => {
       }
 
       setSuccessMessage('Registration successful!');
-      // Set 'isRegistered' flag in localStorage
       localStorage.setItem('isRegistered', true);
 
-      // Navigate to /dashboard
       navigate('/dashboard'); 
 
-      // Reset form
       setFormData({
         full_name: '',
         gender: '',
@@ -167,7 +160,7 @@ const InternshipForm = () => {
         portfolio_links: '',
         emergency_contact_name: '',
         emergency_contact_phone: '',
-        terms_agreement: false, // Reset checkbox
+        terms_agreement: false,
       });
       setFiles({ photo: null, resume: null, adhaar_card: null });
     } catch (error) {

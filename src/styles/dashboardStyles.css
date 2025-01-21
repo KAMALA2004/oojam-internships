@@ -4,13 +4,13 @@
   padding: 0;
   background-color: #F5F5DC;
   height: 100vh;
-  overflow-y: scroll; /* Allow vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  line-height: 1.5; /* Apply 1.5 line spacing globally */
+  overflow-y: scroll; 
+  overflow-x: hidden; 
+  line-height: 1.5; 
 }
 
 .dashboard::-webkit-scrollbar {
-  display: none; /* Hide the scrollbar */
+  display: none; 
 }
 
 
@@ -104,9 +104,9 @@
   max-width: 200px;
 }
 .success-message {
-  color: green; /* Change the text color to green */
-  font-weight: bold; /* Optional: make the text bold */
-  margin-top: 10px; /* Optional: add some space above the message */
+  color: green; 
+  font-weight: bold; 
+  margin-top: 10px;
 }
 .dashboard .submit-container .button:hover {
   background-color: #45a049;
@@ -156,9 +156,9 @@
 
 .dashboard .feedback-box textarea {
   resize: vertical;
-  height: 50px; /* Adjust height if necessary */
-  width: 20%; /* Reduce width to make it smaller */
-  max-width: 300px; /* Set a maximum width */
+  height: 50px;
+  width: 20%; 
+  max-width: 300px; 
 }
 
 
@@ -233,8 +233,8 @@
 .dashboard .feedback-box textarea {
   resize: vertical;
   height: 50px;
-  width: 70%; /* Adjust width to make it shorter than the box */
-  max-width: 100px; /* Optional: Set a maximum width */
+  width: 70%;
+  max-width: 100px; 
 }
 
 
@@ -279,7 +279,6 @@
   background-color: #3949ab;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .dashboard .boxes-row {
     flex-direction: column;
@@ -320,7 +319,6 @@
   }
 }
 
-/* Section Wrap for Textarea Elements */
 .dashboard section {
   margin-bottom: 20px;
   display: flex;

@@ -49,21 +49,21 @@ const Dashboard = () => {
 
   const validateInputs = () => {
     if (leaveStatus === 'On Leave') {
-      // Only validate personName when on leave
+      
       if (!personName) {
         setMessage('Please enter your name.');
         return false;
       }
-      // Allow submission without other fields
+      
       return true;
     } else {
-      // Validate all required fields when working status is Present
+      
       if (!reportDescription || !workingStatus || !inTime || !outTime || !personName) {
         setMessage('Please fill all required fields.');
         return false;
       }
 
-      // Check if any tasks are completed and require a task report
+      
       for (const task of tasks) {
         if (task.status === 'Completed' && !taskReports[task.name]) {
           setMessage('Please provide a task report for completed tasks.');

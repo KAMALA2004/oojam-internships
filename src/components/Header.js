@@ -18,7 +18,7 @@ const Header = ({ user }) => {
         ) : (
           <div>
             <span>Logged in as: {user.email}</span>
-            {/* Update the 'to' prop to navigate to /internship-form */}
+            
             <Link to="/internship-form" className="nav-link">
               Register
             </Link>

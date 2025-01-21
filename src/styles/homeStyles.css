@@ -1,29 +1,28 @@
-/* General Body and Home Styles */
 body, .home {
-  background-color: #F5F5DC; /* Background color for the home page */
-  font-family: 'Arial', sans-serif; /* Default font */
+  background-color: #F5F5DC; 
+  font-family: 'Arial', sans-serif; 
 }
-/* Add space between Register and Dashboard link */
+
 .register-link, .dashboard-link {
   display: block;
-  margin-bottom: 10px; /* Adjust this value to control the space */
+  margin-bottom: 10px;
 }
 
-/* Optional: If you want more space between the links specifically */
+
 .register-link {
-  margin-bottom: 20px; /* More space for the Register link */
+  margin-bottom: 20px; 
 }
 
-/* Header Section */
+
 .header {
   position: relative;
-  left: 0; /* Reset left/right for responsiveness */
+  left: 0;
   right: 0;
-  margin: 0; /* Reset margin for responsiveness */
+  margin: 0; 
   height: 30vh;
   overflow: hidden;
   background-color: #003366;
-  color: rgb(255, 255, 255); /* White text */
+  color: rgb(255, 255, 255); 
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -34,11 +33,11 @@ body, .home {
   border-bottom-right-radius: 40px;
   opacity: 1;
   text-shadow: none;
-  z-index: 1; /* Ensure content stays above */
+  z-index: 1; 
 }
 
 .header * {
-  color: inherit; /* Inherit color for all child elements */
+  color: inherit; 
 }
 
 @keyframes slideDown {
@@ -50,7 +49,7 @@ body, .home {
   }
 }
 
-/* Welcome Message */
+
 .welcome-message {
   text-align: center;
   margin: 40px 0;
@@ -58,99 +57,98 @@ body, .home {
   color: black;
 }
 
-/* Video and Text Container */
+
 .video-text-container {
   display: flex;
-  flex-direction: column; /* Stack video and text vertically */
-  align-items: center; /* Center align items horizontally */
-  justify-content: center; /* Center align items vertically */
-  text-align: center; /* Center text */
-  height: 100vh; /* Full height of the viewport */
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center; 
+  text-align: center;
+  height: 100vh; 
 }
 
-/* Internship Item Section */
 .internship-item {
   display: flex;
-  flex-direction: row; /* Side-by-side layout */
-  margin: 20px 0; /* Gap between boxes */
+  flex-direction: row; 
+  margin: 20px 0; 
   border: 1px solid #000000;
   border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s ease, opacity 0.5s ease; /* Smooth scaling and fade-in */
-  opacity: 0; /* Hidden by default */
-  transform: translateY(20px); /* Start below */
-  height: 400px; /* Consistent height */
+  transition: transform 0.3s ease, opacity 0.5s ease; 
+  opacity: 0; 
+  transform: translateY(20px); 
+  height: 400px; 
   box-sizing: border-box;
 }
 
-/* Add Extra Space Between Boxes */
+
 .internship-item + .internship-item {
   margin-top: 90px; 
 }
 
 .internship-item.visible {
-  opacity: 1; /* Fade-in effect */
-  transform: translateY(0); /* Original position */
+  opacity: 1; 
+  transform: translateY(0); 
 }
 
-/* Video Section */
+
 .video-section {
   flex: 1;
-  height: 100%; /* Full height */
+  height: 100%; 
   overflow: hidden;
   display: flex;
-  justify-content: center; /* Center video horizontally */
-  align-items: center; /* Center video vertically */
+  justify-content: center; 
+  align-items: center; 
 }
 
 .internship-video {
-  width: 100%; /* Full width */
-  height: 100%; /* Full height to cover the section */
+  width: 100%; 
+  height: 100%;
   object-fit: cover; 
-  /* Maintain aspect ratio */
+  
 }
 
-/* Info Section */
+
 .info-section {
   flex: 1;
   display: flex;
-  flex-direction: column; /* Stack text elements */
+  flex-direction: column; 
   justify-content: center;
   padding: 20px;
   background-color: #acf3dd;
   border-radius: 10px;
-  transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth background and shadow transition */
-  position: relative; /* Position relative for overlay */
-  overflow: hidden; /* Prevents text overflow outside the box */
+  transition: background 0.3s ease, box-shadow 0.3s ease; 
+  position: relative; 
+  overflow: hidden; 
   text-align: center;
 }
 
-/* Expanding and Contracting Animation on Hover */
+
 .info-section h2,
 .info-section p {
-  position: relative; /* Relative for animation effects */
-  animation: none; /* Default state */
-  transform-origin: center center; /* Ensure scaling is centered */
-  transition: transform 0.3s ease; /* Smooth transition */
+  position: relative; 
+  animation: none; 
+  transform-origin: center center; 
+  transition: transform 0.3s ease; 
 }
 
 .info-section:hover h2 {
-  transform: scale(1.1); /* Scale up title on hover */
+  transform: scale(1.1); 
 }
 
 .info-section:hover p {
-  transform: scale(1.05); /* Scale up description slightly */
+  transform: scale(1.05); 
 }
 
-/* CTA Button */
+
 .cta-button {
   padding: 10px 20px;
-  background-color: #007B7F; /* Button background */
-  color: white; /* Button text */
+  background-color: #007B7F; 
+  color: white; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease; /* Hover effects */
+  transition: background 0.3s ease, transform 0.3s ease; 
 }
 
 .dashboard-link {
@@ -158,61 +156,60 @@ body, .home {
 }
 
 .cta-button:hover {
-  background-color: #005f5f; /* Darker shade on hover */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
+  background-color: #005f5f; 
+  transform: scale(1.05); 
 }
 
-/* Add space between navigation links */
+
 .nav-link {
-  margin-right: 15px; /* Add space between the buttons */
+  margin-right: 15px; 
   text-decoration: none;
-  color: #ffffff; /* Ensure the text is white */
+  color: #ffffff; 
   font-weight: bold;
  
 }
 
 .nav-link:last-child {
-  margin-right: 0; /* Remove margin from the last link */
+  margin-right: 0; 
 }
 
 .dashboard-link {
   margin-top: 20px;
   text-decoration: none;
-  color: #ffffff; /* Ensure the text is white */
+  color: #ffffff; 
   font-weight: bold;
 }
 
 @media (max-width: 768px) {
   .nav-link {
-    margin-right: 10px; /* Reduce space for smaller screens */
+    margin-right: 10px; 
   }
 
   .video-text-container {
-    flex-direction: column; /* Stack video and text vertically on smaller screens */
+    flex-direction: column; 
   }
 
   .internship-item {
-    flex-direction: column; /* Stack video and info section vertically */
-    height: auto; /* Allow height to adjust based on content */
+    flex-direction: column; 
+    height: auto; 
   }
 
   .video-section, .info-section {
-    flex: none; /* Reset flex behavior */
-    width: 100%; /* Full width for both sections */
-    height: auto; /* Let the content determine the height */
+    flex: none; 
+    width: 100%; 
+    height: auto; 
   }
 
   .internship-video {
-    width: 100%; /* Full width for video on smaller screens */
-    height: auto; /* Adjust height to maintain aspect ratio */
+    width: 100%; 
+    height: auto; 
   }
 
   .info-section {
-    /* Add some space between video and text */
-    text-align: center; /* Center-align text */
+    text-align: center;
   }
 
   .welcome-message {
-    font-size: 1em; /* Adjust font size for mobile */
+    font-size: 1em; 
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient'; // Import your Supabase client
+import { supabase } from '../supabaseClient'; 
 import '../styles/loginStyles.css';
 
 const Login = () => {
@@ -12,27 +12,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Log in with Supabase
+   
     const { user, error: loginError } = await supabase.auth.signInWithPassword({ email, password });
 
     if (loginError) {
       setError(loginError.message);
     } else {
-      // User is authenticated, now check if they are registered
+      
       const { data, error: registrationError } = await supabase
-        .from('internship_registrations') // Check registration status in 'internship_registrations' table
+        .from('internship_registrations') 
         .select('*')
-        .eq('email', email) // Match the user's email
-        .single(); // Get the first matching result
+        .eq('email', email) 
+        .single(); 
 
       if (registrationError) {
         setError('Error checking registration status.');
       } else if (data) {
-        // User is registered, navigate to the dashboard
-        localStorage.setItem('isRegistered', 'true'); // Optional: Store registration status
+        
+        localStorage.setItem('isRegistered', 'true'); 
         navigate('/dashboard');
       } else {
-        // User is authenticated but not registered, redirect to the internship form
+        
         navigate('/internship-form');
       }
     }
