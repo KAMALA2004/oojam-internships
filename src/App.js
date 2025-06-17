@@ -4,19 +4,26 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import InternshipForm from "./components/InternshipForm";
-import Dashboard from "./components/Dashboard";  
-import { supabase } from "./supabaseClient";
+import Dashboard from "./components/Dashboard"; 
+import axios from 'axios';
 
 const App = () => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user || null);
-    };
-    checkUser();
-  }, []);
+useEffect(() => {
+  const checkUser = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/check-session", {
+        withCredentials: true,
+      });
+      setUser(res.data.user || null);
+    } catch (error) {
+      setUser(null);
+    }
+  };
+  checkUser();
+}, []);
+
 
   return (
     <Router>

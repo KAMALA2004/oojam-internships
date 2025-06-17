@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
 import '../styles/dashboardStyles.css';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -49,28 +48,22 @@ const Dashboard = () => {
 
   const validateInputs = () => {
     if (leaveStatus === 'On Leave') {
-      
       if (!personName) {
         setMessage('Please enter your name.');
         return false;
       }
-      
       return true;
     } else {
-      
       if (!reportDescription || !workingStatus || !inTime || !outTime || !personName) {
         setMessage('Please fill all required fields.');
         return false;
       }
-
-      
       for (const task of tasks) {
         if (task.status === 'Completed' && !taskReports[task.name]) {
           setMessage('Please provide a task report for completed tasks.');
           return false;
         }
       }
-
       return true;
     }
   };
@@ -81,51 +74,14 @@ const Dashboard = () => {
 
     setLoading(true);
     try {
-      const uploadedFiles = {};
-      const sanitizedPersonName = personName.replace(/[^a-zA-Z0-9-_]/g, '_');
-
-      for (const [taskIndex, task] of tasks.entries()) {
-        if (task.files && Object.keys(task.files).length) {
-          for (const [type, selectedFile] of Object.entries(task.files)) {
-            if (selectedFile) {
-              const timestamp = Date.now();
-              const fileName = `${taskIndex}_${type}_${selectedFile.name}_${timestamp}`;
-
-              const { data, error } = await supabase.storage
-                .from('internship-uploads')
-                .upload(`reports/${sanitizedPersonName}/${fileName}`, selectedFile);
-
-              if (error) throw new Error(`Error uploading ${type} for task ${taskIndex}: ${error.message}`);
-              uploadedFiles[taskIndex] = uploadedFiles[taskIndex] || {};
-              uploadedFiles[taskIndex][type] = data.path;
-            }
-          }
-        }
-      }
-
-      const { error: insertError } = await supabase.from('internship_reports').insert([{
-        internship_registration_id: 1,
-        working_status: workingStatus || null,
-        leave_status: leaveStatus || null,
-        leave_reason: leaveReason || null,
-        report_description: reportDescription || '',
-        task_files: uploadedFiles,
-        in_time: inTime || null,
-        out_time: outTime || null,
-        person_name: personName,
-        report_date: new Date().toISOString().split('T')[0],
-        feedback: feedback || '',
-      }]);
-
-      if (insertError) throw new Error(insertError.message);
+      // Simulate submission delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       setMessage('Report submitted successfully!');
       setIsSubmitted(true);
       resetForm();
       window.scrollTo(0, 0);
-      setTimeout(() => {
-        setMessage('');
-      }, 5000);
+      setTimeout(() => setMessage(''), 5000);
     } catch (error) {
       setMessage(`Error: ${error.message}`);
     } finally {
@@ -240,7 +196,8 @@ const Dashboard = () => {
                 <h2><FaClock /> Status</h2 >
                 <div className="dashboard-tile">
                   <label htmlFor="workingStatus">Working Status</label>
-                  <select id="workingStatus"
+                  <select
+                    id="workingStatus"
                     value={workingStatus}
                     onChange={(e) => setWorkingStatus(e.target.value)}
                   >
@@ -282,9 +239,8 @@ const Dashboard = () => {
                 <>
                   {tasks.map((task, index) => (
                     <div key={index} className="task-item">
-                      <label htmlFor={`taskName-${index}`}>Task Name:</label>
+                      <label>Task Name:</label>
                       <input
-                        id={`taskName-${index}`}
                         type="text"
                         value={task.name}
                         onChange={(e) => handleTaskNameChange(index, e.target.value)}
@@ -301,18 +257,16 @@ const Dashboard = () => {
                       {task.status === 'Completed' && (
                         <>
                           <div>
-                            <label htmlFor={`taskReport-${index}`}>Task Report:</label>
+                            <label>Task Report:</label>
                             <textarea
-                              id={`taskReport-${index}`}
                               value={taskReports[index] || ''}
                               onChange={(e) => handleTaskReportChange(index, e.target.value)}
                               placeholder="Enter your task report"
                             />
                           </div>
                           <div className="task-file-upload">
-                            <label htmlFor={`taskFile-${index}`}>Upload File:</label>
+                            <label>Upload File:</label>
                             <input
-                              id={`taskFile-${index}`}
                               type="file"
                               onChange={(e) => handleFileChange(e, 'file', index)}
                             />
