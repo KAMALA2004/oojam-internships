@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/internshipFormStyles.css';
 import Header from '../components/Header';
+import axios from 'axios';
+
 
 const InternshipForm = () => {
   const [formData, setFormData] = useState({
@@ -57,75 +59,97 @@ const InternshipForm = () => {
   };
 
   const formatDate = (date) => {
-    if (!date) return null;
-    const d = new Date(date);
-    return d.toISOString().split('T')[0];
-  };
+  if (!date) return null;
+  const d = new Date(date);
+  return isNaN(d.getTime()) ? null : d.toISOString().split('T')[0];
+};
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setErrorMessage('');
-    setSuccessMessage('');
+  e.preventDefault();
+  setLoading(true);
+  setErrorMessage('');
+  setSuccessMessage('');
 
-    try {
-      if (!formData.full_name || !formData.email || !formData.terms_agreement) {
-        setErrorMessage('Please fill out all required fields and agree to the terms.');
-        return;
-      }
-
-      if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        setErrorMessage('Please enter a valid email address.');
-        return;
-      }
-
-      const formattedDob = formatDate(formData.dob);
-      const formattedStartDate = formatDate(formData.start_date);
-
-      // Simulate storing the data
-      console.log('Form Submitted:', {
-        ...formData,
-        dob: formattedDob,
-        start_date: formattedStartDate,
-        photo: files.photo?.name,
-        resume: files.resume?.name,
-        adhaar_card: files.adhaar_card?.name,
-      });
-
-      setSuccessMessage('Registration successful!');
-      localStorage.setItem('isRegistered', true);
-      navigate('/dashboard');
-
-      setFormData({
-        full_name: '',
-        gender: '',
-        dob: '',
-        email: '',
-        phone_number: '',
-        address: '',
-        university_name: '',
-        course_program: '',
-        year_of_study: '',
-        major: '',
-        current_gpa: '',
-        internship_area: '',
-        internship_duration: '',
-        start_date: '',
-        internship_mode: '',
-        relevant_skills: '',
-        portfolio_links: '',
-        emergency_contact_name: '',
-        emergency_contact_phone: '',
-        terms_agreement: false,
-      });
-      setFiles({ photo: null, resume: null, adhaar_card: null });
-    } catch (error) {
-      console.error('Registration error:', error.message);
-      setErrorMessage('Registration failed. Please try again.');
-    } finally {
+  try {
+    // ✅ Basic validation
+    if (!formData.full_name || !formData.email || !formData.terms_agreement) {
+      setErrorMessage('Please fill out all required fields and agree to the terms.');
       setLoading(false);
+      return;
     }
-  };
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setErrorMessage('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+
+    // ✅ Format dates
+    const formattedDob = formatDate(formData.dob);
+    const formattedStartDate = formatDate(formData.start_date);
+
+    // ✅ Create a copy of formData with formatted dates
+    const submitData = {
+      ...formData,
+      dob: formattedDob,
+      start_date: formattedStartDate,
+    };
+
+    // ✅ Use FormData for text + file fields
+    const form = new FormData();
+
+    // Append all text fields
+    for (let key in submitData) {
+      form.append(key, submitData[key]);
+    }
+
+    // Append files if present
+    if (files.photo) form.append('photo', files.photo);
+    if (files.resume) form.append('resume', files.resume);
+    if (files.adhaar_card) form.append('adhaar_card', files.adhaar_card);
+
+    // ✅ Post to backend
+    await axios.post('http://localhost:5000/api/internship', form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    setSuccessMessage('Registration successful!');
+    localStorage.setItem('isRegistered', true);
+    navigate('/dashboard');
+
+    // ✅ Reset form and files
+    setFormData({
+      full_name: '',
+      gender: '',
+      dob: '',
+      email: '',
+      phone_number: '',
+      address: '',
+      university_name: '',
+      course_program: '',
+      year_of_study: '',
+      major: '',
+      current_gpa: '',
+      internship_area: '',
+      internship_duration: '',
+      start_date: '',
+      internship_mode: '',
+      relevant_skills: '',
+      portfolio_links: '',
+      emergency_contact_name: '',
+      emergency_contact_phone: '',
+      terms_agreement: false,
+    });
+    setFiles({ photo: null, resume: null, adhaar_card: null });
+
+  } catch (error) {
+    console.error('Registration error:', error.response ? error.response.data : error.message);
+    setErrorMessage('Registration failed. Please check console for details.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const sections = [
     { id: 'personal', title: 'Personal Information' },
