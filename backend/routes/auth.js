@@ -43,7 +43,10 @@ router.post('/login', (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    // Check internship registration status
+    // ✅ Save user info in session
+    req.session.user = { id: user.id, email: user.email };
+
+    // Optional: check internship registration
     db.query(
       'SELECT * FROM internship_registrations WHERE email = ?',
       [email],
@@ -51,10 +54,19 @@ router.post('/login', (req, res) => {
         if (regErr) return res.status(500).json({ message: 'Registration check failed' });
 
         const isRegistered = regResults.length > 0;
-        res.status(200).json({ message: 'Login successful', isRegistered });
+        res.status(200).json({ message: 'Login successful', user: req.session.user, isRegistered });
       }
     );
   });
+});
+
+// Check session route
+router.get('/check-session', (req, res) => {
+  if (req.session.user) {
+    res.status(200).json({ user: req.session.user });
+  } else {
+    res.status(200).json({ user: null });
+  }
 });
 
 module.exports = router;

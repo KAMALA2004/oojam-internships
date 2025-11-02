@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/loginStyles.css';
 
-const Login = () => {
+const Login = ({ setUser }) => { // <-- receive setUser from App.js
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -16,12 +16,14 @@ const Login = () => {
       const res = await axios.post('http://localhost:5000/api/login', {
         email,
         password,
-      });
+      }, { withCredentials: true }); // <-- make sure cookies are sent
 
       const isRegistered = res.data.isRegistered;
 
+      // Update App.js state
+      setUser({ email }); // <-- set the logged-in user
+
       if (isRegistered) {
-        localStorage.setItem('isRegistered', 'true');
         navigate('/dashboard');
       } else {
         navigate('/internship-form');
